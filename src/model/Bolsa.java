@@ -1,43 +1,68 @@
 package model;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
+import com.opencsv.CSVParser;
+import com.opencsv.CSVParserBuilder;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
+
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Tatsunori on 13/05/2018.
  */
 public class Bolsa {
-    ArrayList<Cotacao> buffer = new ArrayList<Cotacao>();
-    Cotacao cotacao;
-    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
-    public Bolsa(String path) throws IOException, ParseException {
-        //
-        BufferedReader br = new BufferedReader(new FileReader(path));
+    private ArrayList<Cotacao> cotacaoList = new ArrayList<>();
+    private Cotacao cotacao;
 
-        while(br.ready()){
-            String linha = br.readLine();
-            //arraylist para salvar cada linha separada
-            String[] aux = linha.split(" ");
+    private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
+    public Bolsa(String path) throws IOException {
 
-            /*cotacao = new Cotacao();
-            cotacao.setData(formato.parse(aux[0]));
-            cotacao.setMin(Float.parseFloat(aux[1]));
-            cotacao.setMin(Float.parseFloat(aux[2]));
-            cotacao.setMax(Float.parseFloat(aux[3]));
-            cotacao.setVar(Float.parseFloat(aux[4]));
-            cotacao.setPvar(Float.parseFloat(aux[5]));
-            cotacao.setVol(Float.parseFloat(aux[6]));
+        cotacao = new Cotacao();
 
-            //linha completa, palavras salvas separadamente
-            buffer.add(cotacao);
-            */
+        final CSVParser parser = new CSVParserBuilder().withSeparator('\t').build();
+        CSVReader reader = new CSVReaderBuilder(new FileReader(path)).withSkipLines(1).withCSVParser(parser).build();
+
+        List<String[]> records = reader.readAll();
+        for (String[] record : records) {
+            cotacao.setData(record[0]);
+            cotacao.setMin(Float.parseFloat(record[1]));
+            cotacao.setMin(Float.parseFloat(record[2]));
+            cotacao.setMax(Float.parseFloat(record[3]));
+            cotacao.setVar(Float.parseFloat(record[4]));
+            cotacao.setPvar(Float.parseFloat(record[5]));
+            cotacao.setVol(Float.parseFloat(record[6]));
+            cotacaoList.add(cotacao);
         }
+
+    }
+
+    public ArrayList<Cotacao> getCotacaoList() {
+        return cotacaoList;
+    }
+
+    public void setCotacaoList(ArrayList<Cotacao> cotacaoList) {
+        this.cotacaoList = cotacaoList;
+    }
+
+    public Cotacao getCotacao() {
+        return cotacao;
+    }
+
+    public void setCotacao(Cotacao cotacao) {
+        this.cotacao = cotacao;
+    }
+
+    public SimpleDateFormat getFormato() {
+        return formato;
+    }
+
+    public void setFormato(SimpleDateFormat formato) {
+        this.formato = formato;
     }
 }

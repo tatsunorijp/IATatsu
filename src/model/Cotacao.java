@@ -6,18 +6,18 @@ import java.util.Date;
  * Created by Tatsunori on 14/05/2018.
  */
 public class Cotacao {
-    Date data;
-    Float quo;
-    Float min, max;
-    Float var, pvar;
-    Float vol;
+    private String data;
+    private Float quo;
+    private Float min, max;
+    private Float var, pvar;
+    private Float vol;
 
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 
