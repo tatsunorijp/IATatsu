@@ -1,14 +1,17 @@
 import model.Bolsa;
+import model.Estado;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by Tatsunori on 19/04/2018.
  */
 public class Main {
     public static void main(String[] args) throws IOException{
+
         Bolsa ciel3 = new Bolsa("resources/2014-2015/CIEL3.tsv");
         Bolsa grnd3 = new Bolsa("resources/2014-2015/GRND3.tsv");
         Bolsa jslg3 = new Bolsa("resources/2014-2015/JSLG3.tsv");
@@ -30,6 +33,20 @@ public class Main {
         Bolsa timp3_2016 = new Bolsa("resources/2016/TIMP3.tsv");
         Bolsa vivt3_2016 = new Bolsa("resources/2016/VIVT3.tsv");
         Bolsa wege3_2016 = new Bolsa("resources/2016/WEGE3.tsv");
+
+        //carteira inicial
+        Estado carteira = new Estado(1000.00, new ArrayList<>(Arrays.asList(0,0,0,0,0,0,0,0,0,0)));
+
+        //contagem de dias
+        Integer dias = ciel3_2016.getCotacaoList().size();
+        Integer hoje = 1;
+
+        //loop de dias
+        while(hoje<=dias){
+
+
+            hoje++;
+        }
 
     }
 

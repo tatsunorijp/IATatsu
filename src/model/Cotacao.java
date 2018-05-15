@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Created by Tatsunori on 14/05/2018.
@@ -11,7 +12,6 @@ public class Cotacao {
     private Float min, max;
     private Float var, pvar;
     private Float vol;
-
 
     public String getData() {
         return data;
