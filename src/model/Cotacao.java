@@ -12,6 +12,24 @@ public class Cotacao {
     private Float min, max;
     private Float var, pvar;
     private Float vol;
+    private Float predicao;
+    private Float aptidao;
+
+    public Float getAptidao() {
+        return aptidao;
+    }
+
+    public void setAptidao(Float aptidao) {
+        this.aptidao = aptidao;
+    }
+
+    public Float getPredicao() {
+        return predicao;
+    }
+
+    public void setPredicao(Float predicao) {
+        this.predicao = predicao;
+    }
 
     public String getData() {
         return data;

@@ -31,6 +31,9 @@ public class Bolsa implements Comparator{
         final CSVParser parser = new CSVParserBuilder().withSeparator('\t').build();
         CSVReader reader = new CSVReaderBuilder(new FileReader(path)).withSkipLines(1).withCSVParser(parser).build();
 
+        float soma=0, predicao=0, somaPredicao = 0, mediaPredicao = 0;
+        int numElem = 0;
+
         List<String[]> records = reader.readAll();
         for (String[] record : records) {
             cotacao = new Cotacao();
@@ -41,17 +44,33 @@ public class Bolsa implements Comparator{
             cotacao.setVar(Float.parseFloat(record[4]));
             cotacao.setPvar(Float.parseFloat(record[5]));
             cotacao.setVol(Float.parseFloat(record[6]));
-            cotacaoList.add(cotacao);
 
+            //calcular a media movel de 25 dias
+            soma = soma + Float.parseFloat(record[1]);
+            if(numElem >= 25){
+                predicao = soma/25;
+                somaPredicao = somaPredicao + predicao;
+                cotacao.setPredicao(predicao);
+
+                //remove o primeiro elemento da soma
+                soma = soma - cotacaoList.get(numElem-25).getQuo();
+            }
+
+            numElem++;
+            cotacaoList.add(cotacao);
         }
+        mediaPredicao = somaPredicao/numElem;
         cotacaoList.sort(this);
 
-        /*for (Cotacao aux : cotacaoList) {
-            System.out.println("data: " + aux.getData());
-            System.out.println("cotacao: " + aux.getQuo());
-            System.out.println("--------------------------------");
-        }*/
+        for(Cotacao o: cotacaoList){
+            o.setAptidao(mediaPredicao - o.getQuo());
+        }
 
+    }
+
+    public int mm25(){
+
+        return 0;
     }
 
     public ArrayList<Cotacao> getCotacaoList() {
