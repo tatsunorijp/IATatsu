@@ -21,17 +21,18 @@ import java.util.List;
  */
 public class Bolsa implements Comparator{
 
-    private ArrayList<Cotacao> cotacaoList = new ArrayList<>();
-    private Cotacao cotacao;
-
-    private DateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+    public ArrayList<Cotacao> cotacaoList = new ArrayList<>();
+    public Cotacao cotacao;
+    public float mediaPredicao = 0;
+    public float mediaAptidao = 0;
+    public DateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
     public Bolsa(String path) throws IOException{
 
         final CSVParser parser = new CSVParserBuilder().withSeparator('\t').build();
         CSVReader reader = new CSVReaderBuilder(new FileReader(path)).withSkipLines(1).withCSVParser(parser).build();
 
-        float soma=0, predicao=0, somaPredicao = 0, mediaPredicao = 0;
+        float soma=0, predicao=0, somaPredicao = 0;
         int numElem = 0;
 
         List<String[]> records = reader.readAll();
@@ -49,8 +50,8 @@ public class Bolsa implements Comparator{
             soma = soma + Float.parseFloat(record[1]);
             if(numElem >= 25){
                 predicao = soma/25;
-                somaPredicao = somaPredicao + predicao;
                 cotacao.setPredicao(predicao);
+                somaPredicao = somaPredicao + predicao;
 
                 //remove o primeiro elemento da soma
                 soma = soma - cotacaoList.get(numElem-25).getQuo();
@@ -62,15 +63,20 @@ public class Bolsa implements Comparator{
         mediaPredicao = somaPredicao/numElem;
         cotacaoList.sort(this);
 
+        //set a aptidao de cada dia
         for(Cotacao o: cotacaoList){
             o.setAptidao(mediaPredicao - o.getQuo());
+            mediaAptidao = mediaAptidao + o.getAptidao();
         }
-
+        mediaAptidao = mediaAptidao/numElem;
     }
 
-    public int mm25(){
+    public float getMediaPredicao() {
+        return mediaPredicao;
+    }
 
-        return 0;
+    public void setMediaPredicao(float mediaPredicao) {
+        this.mediaPredicao = mediaPredicao;
     }
 
     public ArrayList<Cotacao> getCotacaoList() {

@@ -1,8 +1,6 @@
-import model.Bolsa;
-import model.Estado;
+import model.*;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -11,7 +9,8 @@ import java.util.Arrays;
  */
 public class Main {
     public static void main(String[] args) throws IOException{
-
+        ArrayList<Bolsa> bolsa_2016 = new ArrayList<>();
+        ArrayList<Bolsa> bolsa_2014 = new ArrayList<>();
         Bolsa ciel3 = new Bolsa("resources/2014-2015/CIEL3.tsv");
         Bolsa grnd3 = new Bolsa("resources/2014-2015/GRND3.tsv");
         Bolsa jslg3 = new Bolsa("resources/2014-2015/JSLG3.tsv");
@@ -22,6 +21,16 @@ public class Main {
         Bolsa timp3 = new Bolsa("resources/2014-2015/TIMP3.tsv");
         Bolsa vivt3 = new Bolsa("resources/2014-2015/VIVT3.tsv");
         Bolsa wege3 = new Bolsa("resources/2014-2015/WEGE3.tsv");
+        bolsa_2014.add(ciel3);
+        bolsa_2014.add(grnd3);
+        bolsa_2014.add(jslg3);
+        bolsa_2014.add(lren3);
+        bolsa_2014.add(natu3);
+        bolsa_2014.add( prt4);
+        bolsa_2014.add(sbsp3);
+        bolsa_2014.add(timp3);
+        bolsa_2014.add(vivt3);
+        bolsa_2014.add(wege3);
 
         Bolsa ciel3_2016 = new Bolsa("resources/2016/CIEL3.tsv");
         Bolsa grnd3_2016 = new Bolsa("resources/2016/GRND3.tsv");
@@ -33,17 +42,28 @@ public class Main {
         Bolsa timp3_2016 = new Bolsa("resources/2016/TIMP3.tsv");
         Bolsa vivt3_2016 = new Bolsa("resources/2016/VIVT3.tsv");
         Bolsa wege3_2016 = new Bolsa("resources/2016/WEGE3.tsv");
+        bolsa_2016.add(ciel3_2016);
+        bolsa_2016.add(grnd3_2016);
+        bolsa_2016.add(jslg3_2016);
+        bolsa_2016.add(lren3_2016);
+        bolsa_2016.add(natu3_2016);
+        bolsa_2016.add( prt4_2016);
+        bolsa_2016.add(sbsp3_2016);
+        bolsa_2016.add(timp3_2016);
+        bolsa_2016.add(vivt3_2016);
+        bolsa_2016.add(wege3_2016);
 
         //carteira inicial
         Estado carteira = new Estado(1000.00, new ArrayList<>(Arrays.asList(0,0,0,0,0,0,0,0,0,0)));
 
+        AG ag = new AG();
+        ag.gerarPopulacao(bolsa_2016, bolsa_2014);
         //contagem de dias
-        Integer dias = ciel3_2016.getCotacaoList().size();
-        Integer hoje = 1;
+        Integer dias = ciel3_2016.getCotacaoList().size() - 1;
+        Integer hoje = 0;
 
         //loop de dias
-        while(hoje<=dias){
-
+        while(hoje < dias){
 
             hoje++;
         }

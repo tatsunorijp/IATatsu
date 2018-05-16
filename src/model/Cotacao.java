@@ -7,13 +7,13 @@ import java.util.Objects;
  * Created by Tatsunori on 14/05/2018.
  */
 public class Cotacao {
-    private String data;
-    private Float quo;
-    private Float min, max;
-    private Float var, pvar;
-    private Float vol;
-    private Float predicao;
-    private Float aptidao;
+    public String data;
+    public Float quo;
+    public Float min, max;
+    public Float var, pvar;
+    public Float vol;
+    public Float predicao;
+    public Float aptidao;
 
     public Float getAptidao() {
         return aptidao;
