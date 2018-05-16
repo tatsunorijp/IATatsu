@@ -10,6 +10,9 @@ public class Main {
     public static void main(String[] args) throws IOException{
         ArrayList<Bolsa> bolsa_2016 = new ArrayList<>();
         ArrayList<Bolsa> bolsa_2014 = new ArrayList<>();
+        int mes = 0, viraMes = 0;
+        double ganho;
+
         Bolsa ciel3 = new Bolsa("resources/2014-2015/CIEL3.tsv");
         Bolsa grnd3 = new Bolsa("resources/2014-2015/GRND3.tsv");
         Bolsa jslg3 = new Bolsa("resources/2014-2015/JSLG3.tsv");
@@ -64,8 +67,15 @@ public class Main {
         //contagem de dias
         //loop de dias
         while(hoje < dias){
-            ag.crossover(bolsa_2016, bolsa_2014, hoje);
+            ganho = ag.crossover(bolsa_2016, bolsa_2014, hoje);
             hoje++;
+            viraMes++;
+
+            if(viraMes >=20){
+                System.out.println("Ganho do mes " + mes + ": " + ganho/1000);
+                viraMes = 0;
+                mes++;
+            }
         }
 
     }

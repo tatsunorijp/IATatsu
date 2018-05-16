@@ -40,7 +40,7 @@ public class AG {
         return carteira;
     }
 
-    public void crossover(ArrayList<Bolsa> empresa_2016, ArrayList<Bolsa> empresa_2014, int hoje){
+    public double crossover(ArrayList<Bolsa> empresa_2016, ArrayList<Bolsa> empresa_2014, int hoje){
         Estado carteiraPai, carteiraMae, carteiraFilho;
         int i, quantAcoes, j;
 
@@ -83,6 +83,8 @@ public class AG {
 //        System.out.println(estadoAtual.acoes);
 //        System.out.println(estadoAtual.aptidao);
 //        System.out.println();
+
+        return estadoAtual.saldoLiquido + estadoAtual.dindin(empresa_2016, hoje);
 
     }
 
