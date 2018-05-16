@@ -2,7 +2,6 @@ import model.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by Tatsunori on 19/04/2018.
@@ -53,18 +52,19 @@ public class Main {
         bolsa_2016.add(vivt3_2016);
         bolsa_2016.add(wege3_2016);
 
-        //carteira inicial
-        Estado carteira = new Estado(1000.00, new ArrayList<>(Arrays.asList(0,0,0,0,0,0,0,0,0,0)));
+
+        Integer dias = ciel3_2016.getCotacaoList().size() - 1;
+        Integer hoje = 1;
 
         AG ag = new AG();
         ag.gerarPopulacao(bolsa_2016, bolsa_2014);
-        //contagem de dias
-        Integer dias = ciel3_2016.getCotacaoList().size() - 1;
-        Integer hoje = 0;
+        ag.crossover(bolsa_2016, bolsa_2014, 0);
 
+
+        //contagem de dias
         //loop de dias
         while(hoje < dias){
-
+            ag.crossover(bolsa_2016, bolsa_2014, hoje);
             hoje++;
         }
 

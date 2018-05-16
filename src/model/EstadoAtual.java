@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class EstadoAtual {
-    public Double saldoLiquido;
+    public Double saldoLiquido = 1000.00;
     /*  ciel3
         grnd3
         jslg3
@@ -31,5 +31,16 @@ public class EstadoAtual {
         for(i = 0; i < 10; i++){
             aptidao = aptidao + acoes.get(i) * Math.abs(bolsa_2014.get(i).mediaAptidao);
         }
+    }
+
+    public double dindin(ArrayList<Bolsa> empresa_2016, int dia){
+        double total = 0.0;
+        int j = 0;
+        for(Integer i: acoes){
+            total = total + (i * empresa_2016.get(j).cotacaoList.get(dia).getQuo());
+            j++;
+        }
+
+        return total;
     }
 }
